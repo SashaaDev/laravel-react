@@ -1,5 +1,4 @@
 React and Laravel project
-1. Go to ```cd server``` and do command ```docker compose run --rm app composer create-project laravel/laravel .```
-2. Write ``` cd ../client``` and do command ```docker compose run --rm client npx create-react-app . --template typescript```
-4. Copy env from the example ```cp .env.example .env```
-5. ```cd ..``` and ```docker compose up --build -d```
+1. Copy env from the example ```cp .env.example .env```
+2. ```cd server``` and do command form step 1
+3.```cd ../``` and run  ```docker compose up --build -d```
