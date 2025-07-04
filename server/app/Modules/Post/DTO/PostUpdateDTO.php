@@ -7,16 +7,15 @@ class PostUpdateDTO
         public ?int $user_id = null,
         public ?string $title = null,
         public ?string $content = null,
-    )
-    {
+    ) {
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $postUpdate): self
     {
         return new self(
-            user_id: $data['user_id'] ?? null,
-            title: $data['title'] ?? null,
-            content: $data['content'] ?? null,
+            user_id: $postUpdate['user_id'] ?? null,
+            title: $postUpdate['title'] ?? null,
+            content: $postUpdate['content'] ?? null,
         );
     }
 

@@ -1,22 +1,23 @@
 <?php
 namespace App\Modules\Post\DTO;
 
+use App\Modules\Post\Requests\PostCreateRequest;
+
 class PostCreateDTO
 {
     public function __construct(
         public int $user_id,
         public string $title,
         public string $content,
-    )
-    {
+    ) {
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $postCreate): self
     {
         return new self(
-            user_id: $data['user_id'],
-            title: $data['title'],
-            content: $data['content'],
+            user_id: $postCreate['user_id'],
+            title: $postCreate['title'],
+            content: $postCreate['content'],
         );
     }
 
