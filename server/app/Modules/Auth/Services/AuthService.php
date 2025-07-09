@@ -3,6 +3,7 @@
 namespace App\Modules\Auth\Services;
 
 use App\Models\User;
+use App\Modules\Auth\DTO\AuthResultDTO;
 use App\Modules\Auth\DTO\LoginDTO;
 use App\Modules\Auth\DTO\RegisterDTO;
 use App\Modules\User\Repositories\UserRepository;
@@ -15,19 +16,17 @@ class AuthService
     {
     }
 
-    public function register(RegisterDTO $registerDTO): array
+    public function register(RegisterDTO $registerDTO): AuthResultDTO
     {
         $user = $this->userRepository->create($registerDTO);
 
         $token = $this->userRepository->createAuthToken($user);
 
-        return [
-            "user" => $user,
-            "token" => $token
-        ];
+        return new AuthResultDTO($token, $user);
+
     }
 
-    public function login(LoginDTO $loginDTO): string
+    public function login(LoginDTO $loginDTO): AuthResultDTO
     {
         $user = $this->userRepository->findUserByEmail($loginDTO->email);
 
@@ -36,8 +35,9 @@ class AuthService
                 'email' => ['Invalid credentials']
             ]);
         }
+        $token = $this->userRepository->createAuthToken($user);
 
-        return $this->userRepository->createAuthToken($user);
+        return new AuthResultDTO($token, $user);
     }
 
     public function logout(User $user): void

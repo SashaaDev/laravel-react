@@ -55,10 +55,11 @@ services:
     command: >
       sh -c "
         if [ ! -f package.json ]; then
-          npm create vite@latest . -- --template react-ts;
+          npm create vite@latest . -- --template react-ts &&
+          npm install react-router-dom axios formik yup bootstrap react-bootstrap @types/react-bootstrap;
         fi &&
         npm install &&
-        npm run dev -- --host"
+        npm run dev -- --host 0.0.0.0"
     ports:
       - "5173:5173"
     networks:
